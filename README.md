@@ -14,7 +14,8 @@ Objetivos específicos:
 
 1. Identificar y abstraer: los agentes activos y principales del juego, transformando los requisitos del sistema en clases con sentido lógico y coherente.
 
-2. Definir atributos y métodos para cada clase, dejando plasmado el nivel de acceso adecuado (`+` público, `-` privado, `#` protegido) según las buenas prácticas que conocemos.
+2. Definir atributos y métodos para cada clase, dejando plasmado el nivel de acceso adecuado (`+` público, `-` privado, `#` protegido) 
+según las buenas prácticas que conocemos.
 
 3. Establecer relaciones entre clases
 
