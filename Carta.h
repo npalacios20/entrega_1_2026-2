@@ -8,7 +8,7 @@ private:
     int valor;
 
 public:
-    Carta(std::string col, int val);
+    Carta(std::string color_, int valor_);
 
     std::string getColor() const;
     int getValor() const;
