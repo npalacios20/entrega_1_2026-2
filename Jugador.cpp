@@ -1,59 +1,60 @@
-// *********************************************************************************
-// CLASE: Jugador
-// *********************************************************************************
-class Jugador {
-private:
-    int id;
-    int puntuajeTotal;
-    vector<Carta*> mano;
+#include "Jugador.h"
+using namespace std;
 
-public:
-    Jugador(int _id) : id(_id), puntuajeTotal(0) {}
+Jugador::Jugador(int _id) : id(_id), puntuajeTotal(0) {}
 
-    void recibirCarta(Carta* c) {
-        mano.push_back(c);
+void Jugador::recibirCarta(Carta* c) {
+    mano.push_back(c);
+}
+
+Carta* Jugador::jugarCarta(int indice) {
+    if (indice >= 0 && indice < (int)mano.size()) {
+        Carta* c = mano[indice];
+        mano.erase(mano.begin() + indice);
+        return c;
     }
+    return nullptr;
+}
 
-    Carta* jugarCarta(int indice) {
-        if (indice >= 0 && indice < (int)mano.size()) {
-            Carta* c = mano[indice];
-            mano.erase(mano.begin() + indice);
-            return c;
-        }
-        return nullptr;
+void Jugador::sumarPuntos(int puntos) {
+    puntuajeTotal = puntuajeTotal + puntos;
+}
+
+void Jugador::setPuntuajeTotal(int valor) {
+    puntuajeTotal = valor;
+}
+
+void Jugador::reiniciarTodo() {
+    puntuajeTotal = 0;
+    for (Carta* c : mano) {
+        delete c;
     }
+    mano.clear();
+}
 
-    void sumarPuntos(int puntos) {
-        puntuajeTotal += puntos;
+void Jugador::mostrarMano() const {
+    cout << "\n" << AZUL << "--- Mano del Jugador " << id << " ---" << RESET << "\n";
+    if (mano.empty()) {
+        cout << "   ⚠️ No tienes cartas.\n";
+        return;
     }
-
-    void setPuntuajeTotal(int valor) {
-        puntuajeTotal = valor;
+    for (size_t i = 0; i < mano.size(); i++) {
+        cout << "   [" << i << "] " << mano[i]->mostrar() << "\n";
     }
+}
 
-    void reiniciarTodo() {
-        puntuajeTotal = 0;
-        for (Carta* c : mano) delete c;
-        mano.clear();
-    }
+void Jugador::mostrarPuntuacion() const {
+    cout << "👤 Jugador " << id << " → " << VERDE << puntuajeTotal << " puntos" << RESET << "\n";
+}
 
-    void mostrarMano() const {
-        cout << "\n" << AZUL << "--- Mano del Jugador " << id << " ---" << RESET << "\n";
-        if (mano.empty()) {
-            cout << "   ⚠️ No tienes cartas.\n";
-            return;
-        }
-        for (size_t i = 0; i < mano.size(); i++) {
-            cout << "   [" << i << "] " << mano[i]->mostrar() << "\n";
-        }
-    }
+int Jugador::getId() const { 
+    return id; 
+}
 
-    void mostrarPuntuacion() const {
-        cout << "👤 Jugador " << id << " → " << VERDE << puntuajeTotal << " puntos" << RESET << "\n";
-    }
+int Jugador::getPuntuajeTotal() const { 
+    return puntuajeTotal; 
+}
 
-    int getId() const { return id; }
-    int getPuntuajeTotal() const { return puntuajeTotal; }
-    int cantidadCartas() const { return (int)mano.size(); }
-};
-
+int Jugador::cantidadCartas() const { 
+    return (int)mano.size(); 
+}
